@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(0.25turn,#e66465, #9198e5);
+            color: #333;
+            text-align: center;
+            padding: 50px;
+        }
+
+        input {
+            padding: 8px;
+            border: none;
+            border-radius: 5px;
+            width: 70%;
+        }
+        button {
+            padding: 8px 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        img {
+            width: 80px;
+
+        }
+        .card-container {
+            background-color: violet;
+            outline: solid;
+            color: black;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            box-shadow: 30px 4px 10px rgba(0,0,0,0.1);
+        }
+        form{
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Your Go-To Weather App</h1>
+
+    <form method="POST">
+        <input type="text" name="city" placeholder="Enter city..." required>
+        <button type="submit">Get Weather</button>
+    </form>
+
+    {% if weather %}
+        <div class="card-container">
+            {% if weather.error %}
+                <p>{{ weather.error }}</p>
+            {% else %}
+                <h2>{{ weather.city }}</h2>
+                <img src="https://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather icon">
+                <p><strong>{{ weather.description }}</strong></p>
+                <p>🌡️ Temperature: {{ weather.temperature }}°F</p>
+                <p>💧 Humidity: {{ weather.humidity }}%</p>
+            {% endif %}
+        </div>
+    {% endif %}
+</body>
+</html>
